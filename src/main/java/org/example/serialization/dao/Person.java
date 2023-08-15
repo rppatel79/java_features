@@ -2,6 +2,7 @@ package org.example.serialization.dao;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Person implements Serializable {
     @Serial
@@ -46,5 +47,18 @@ public class Person implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", DEFAULT_EMAIL_VALUE='" + DEFAULT_EMAIL_VALUE + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }
